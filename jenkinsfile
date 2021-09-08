@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Git clone') {
             steps {
-                echo 'Hello World'
+                git clone https://github.com/akashtomar12/NodeApp.git
             }
         }
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                echo 'Building'
+               docker build -t jenkinimage .
             }
         }
         stage('Deploy') {
