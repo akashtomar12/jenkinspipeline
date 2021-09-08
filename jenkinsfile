@@ -4,7 +4,15 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                git clone https://github.com/akashtomar12/NodeApp.git
+                withCredentials(usernamePassword(credentialsId :jenkins-user-github ,passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME' )){
+              // Get some code from a GitHub repository
+              bat("""
+              git config --global credential.username {GIT_USERNAME}
+              git config --global credential.helper "!echo password={GIT_PASSWORD}; echo"
+              git clone https://github.com/aakashsehgal/FMU.git
+
+              echo "pulled the code"
+              """)
             }
         }
         stage('Docker Build') {
