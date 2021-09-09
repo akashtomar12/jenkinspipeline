@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-                 echo 'git clone https://github.com/akashtomar12/spring-petclinic.git'
+                 sh 'git clone https://github.com/akashtomar12/spring-petclinic.git'
             }
         }
         stage('Docker Build') {
             steps {
-                echo 'docker build -t jenkinimage .'
+                sh 'docker build -t jenkinimage .'
             }
         }
         stage('Deploy') {
